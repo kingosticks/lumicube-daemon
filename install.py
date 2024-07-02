@@ -75,12 +75,13 @@ def install_daemon():
     run('systemctl --user stop foundry-daemon.service', check=False, quiet=True)
     run('systemctl --user disable foundry-daemon.service', check=False, quiet=True)
 
-    version_url = DOWNLOAD_URL_PREFIX + 'latest_daemon.txt'
-    with urllib.request.urlopen(version_url) as file:
-        version = file.read().decode('utf-8').strip()
+    #version_url = DOWNLOAD_URL_PREFIX + 'latest_daemon.txt'
+    #with urllib.request.urlopen(version_url) as file:
+    #    version = file.read().decode('utf-8').strip()
+    version = '1.8'
 
     daemon_name = 'Daemon-' + version + '-' + variant + '.AppImage'
-    binary_url = DOWNLOAD_URL_PREFIX + daemon_name
+    binary_url = 'https://github.com/abstractfoundry/lumicube-daemon/releases/download/v1.8/Daemon-1.8-arm.AppImage'
     destination_path = os.path.join(software_directory, daemon_name)
     run('curl -fL ' + shlex.quote(binary_url) + ' > ' + destination_path)
     set_default_executable_permissions(destination_path)
@@ -194,9 +195,9 @@ def install_addon_packages():
 
     autumn_image = 'autumn.jpg'
     autumn_image_path = os.path.join(desktop_directory, autumn_image)
-    run('curl -fL '
-        + shlex.quote(DOWNLOAD_URL_PREFIX + autumn_image)
-        + ' > ' + autumn_image_path)
+    #run('curl -fL '
+        #+ shlex.quote(DOWNLOAD_URL_PREFIX + autumn_image)
+        #+ ' > ' + autumn_image_path)
 
 
 install_system_dependencies()
